@@ -6,13 +6,19 @@ const GRAVITY = 20
 const MAXFALLSPEED = 350
 const MAXSPEED = 175
 const JUMPFORCE = 400
-const ACCEL = 10
+const ACCEL = 15
+const DASHSPEED = 175
+const DASHDURATION = 0.2
+
+onready var dash = $Dash
 
 export var hitpoints = 100
 
 # Movement/States
 var motion = Vector2()
+var speed = 0
 var facing_right = true
+var is_dashing = false
 
 var jump_count = 0
 export var extra_jumps = 1
@@ -79,6 +85,20 @@ func _physics_process(delta):
 		elif motion.y > 0:
 			$AnimatedSprite.play("Fall")
 			
+	# Dash
+	if dash.is_dashing():
+		speed = DASHSPEED
+	else:
+		is_dashing = false
+	
+	if Input.is_action_just_pressed("Dash") && dash.can_dash && !dash.is_dashing():
+		dash.start_dash(DASHDURATION)
+		is_dashing = true
+		
+	if is_dashing == true:
+		motion.x = motion.x * speed * delta
+	
+			
 	# Combat
 	if is_on_floor():
 		if Input.is_action_just_pressed("Attack") && combo_attack == false && cooldown_active == false  && dead == false:
@@ -135,14 +155,15 @@ func _on_DeathTimer_timeout():
 
 
 func _on_Hitbox_area_entered(area):
-	if area.is_in_group("Skeleton") && hitpoints == 0:
-		print_debug("dead")
+	if area.is_in_group("Skeleton") && (hitpoints - 10) <= 0:
+		if dash.is_dashing(): return
 		# motion.x = 0
 		getting_hit = true
 		dead = true
 		is_attacking = false
 		$AnimatedSprite.play("Death")
 	elif area.is_in_group("Skeleton") && hitpoints > 0:
+		if dash.is_dashing(): return
 		getting_hit = true
 		$Effects.play("Hit")
 		hitpoints = hitpoints - 10
@@ -152,6 +173,3 @@ func _on_Hitbox_area_entered(area):
 func _on_Effects_animation_finished(anim_name):
 	if anim_name == "Hit":
 			getting_hit = false
-
-
-
