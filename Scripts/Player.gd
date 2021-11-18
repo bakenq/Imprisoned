@@ -8,7 +8,7 @@ const MAXSPEED = 175
 const JUMPFORCE = 400
 const ACCEL = 15
 const DASHSPEED = 175
-const DASHDURATION = 0.2
+const DASHDURATION = 0.175
 
 onready var dash = $Dash
 
@@ -17,6 +17,7 @@ export var hitpoints = 100
 # Movement/States
 var motion = Vector2()
 var speed = 0
+var gravity_on = true
 var facing_right = true
 var is_dashing = false
 
@@ -37,7 +38,11 @@ func _ready():
 
 func _physics_process(delta):
 	
-	motion.y += GRAVITY
+	if gravity_on:
+		motion.y += GRAVITY
+	else:
+		motion.y = 0
+	
 	if motion.y > MAXFALLSPEED:
 		motion.y = MAXFALLSPEED
 		
@@ -69,7 +74,7 @@ func _physics_process(delta):
 			$AnimatedSprite.play("Idle")
 			
 	# Double Jump
-	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps  && dead == false:
+	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
 		if is_attacking == true:
 			is_attacking = false
 			$AnimatedSprite.stop()
@@ -90,15 +95,23 @@ func _physics_process(delta):
 		speed = DASHSPEED
 	else:
 		is_dashing = false
+		gravity_on = true
+		set_collision_layer_bit(6, true)
+		set_collision_mask_bit(6, true)
 	
 	if Input.is_action_just_pressed("Dash") && dash.can_dash && !dash.is_dashing():
-		dash.start_dash(DASHDURATION)
+		dash.start_dash($AnimatedSprite, DASHDURATION)
 		is_dashing = true
+		gravity_on = false
+		set_collision_layer_bit(6, false)
+		set_collision_mask_bit(6, false)
 		
-	if is_dashing == true:
+	if is_dashing == true && facing_right == true:
 		motion.x = motion.x * speed * delta
-	
-			
+	elif is_dashing == true && facing_right == false:
+		motion.x = motion.x * speed * delta
+
+
 	# Combat
 	if is_on_floor():
 		if Input.is_action_just_pressed("Attack") && combo_attack == false && cooldown_active == false  && dead == false:

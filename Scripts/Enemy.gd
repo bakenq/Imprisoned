@@ -45,7 +45,6 @@ func detect_turn_around():
 	if $RayCast2D_Side.is_colliding() and is_on_floor():
 		moving_left = !moving_left
 		scale.x = -scale.x
-	##### ToDo: weiterer Raycast der Wände detected
 
 func hit():
 	$AttackDetector.monitoring = true
@@ -111,7 +110,9 @@ func _on_Hitbox_area_entered(area):
 
 func _on_AttackAreaDelay_timeout():
 	$AttackDetector/CollisionShape2D.disabled = false
+	$PlayerDetector/CollisionShape2D.disabled = true
 	$AttackAreaDelay2.start(0.2)
+	$PlayerDetectorDelay.start(1.25)
 	
 func _on_AttackAreaDelay2_timeout():
 	$AttackDetector/CollisionShape2D.disabled = true
@@ -120,3 +121,7 @@ func _on_AttackAreaDelay2_timeout():
 func _on_Effects_animation_finished(anim_name):
 	if anim_name == "Hit":
 			getting_hit = false
+
+
+func _on_PlayerDetectorDelay_timeout():
+	$PlayerDetector/CollisionShape2D.disabled = false

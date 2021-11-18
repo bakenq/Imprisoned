@@ -14,6 +14,7 @@ var getting_hit = false
 var facing_right = false
 var motion = Vector2(0,0)
 var is_moving = false
+var is_chasing = false
 
 var knockback_force = 100
 
@@ -50,7 +51,7 @@ func _physics_process(delta):
 		$CollisionShape2D.position.x = -4.25
 		#get_node("AttackArea").set_scale(Vector2(-1,1))
 
-	if player:
+	if is_chasing == true:
 		if position.direction_to(player.position).x < 0 && getting_hit == false:
 			motion.x -= ACCEL
 			facing_right = true
@@ -61,10 +62,10 @@ func _physics_process(delta):
 			facing_right = false
 			$AnimatedSprite.play("Walk")
 			#print_debug("right")
-		else:
-			motion.x = lerp(motion.x,0,0.1)
-			if is_moving == false && getting_hit == false:
-				$AnimatedSprite.play("Idle")
+	else:
+		motion.x = lerp(motion.x,0,0.1)
+		if is_chasing == false && getting_hit == false:
+			$AnimatedSprite.play("Idle")
 		
 	motion = move_and_slide(motion, UP)
 
@@ -77,10 +78,12 @@ func knockback():
 		
 func _on_DetectionRadius_body_entered(body):
 	player = body
+	is_chasing = true
 
 
 func _on_DetectionRadius_body_exited(body):
 	player = null
+	is_chasing = false
 
 func _on_Skeleton_area_entered(area):
 	if area.is_in_group("Sword") && hitpoints == 0:
