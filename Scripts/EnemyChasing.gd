@@ -173,9 +173,6 @@ func _on_AnimatedSprite_animation_finished():
 			is_attacking = false
 			$AnimatedSprite.offset.y = 0
 			$AnimatedSprite.offset.x = 0
-		#if $AnimatedSprite.animation == "GetHit":
-			#getting_hit = false
-			#is_attacking = false
 		if $AnimatedSprite.animation == "Death":
 			queue_free()
 

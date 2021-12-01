@@ -11,6 +11,7 @@ const DASHSPEED = 175
 const DASHDURATION = 0.175
 
 onready var dash = $Dash
+onready var health_bar = $HealthBar
 
 export var hitpoints = 100
 
@@ -59,6 +60,14 @@ func _physics_process(delta):
 		
 	motion.x = clamp(motion.x,-MAXSPEED,MAXSPEED)
 	
+	move()
+	jump()
+	dash(delta)
+	combat()
+			
+	motion = move_and_slide(motion,UP)
+
+func move():
 	# Movement
 	if Input.is_action_pressed("right") && is_attacking == false && dead == false:
 		motion.x += ACCEL
@@ -73,6 +82,8 @@ func _physics_process(delta):
 		if is_attacking == false && dead == false:
 			$AnimatedSprite.play("Idle")
 			
+			
+func jump():
 	# Double Jump
 	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
 		if is_attacking == true:
@@ -90,6 +101,7 @@ func _physics_process(delta):
 		elif motion.y > 0:
 			$AnimatedSprite.play("Fall")
 			
+func dash(delta):
 	# Dash
 	if dash.is_dashing():
 		speed = DASHSPEED
@@ -98,6 +110,7 @@ func _physics_process(delta):
 		gravity_on = true
 		set_collision_layer_bit(6, true)
 		set_collision_mask_bit(6, true)
+		#$Hitbox/CollisionShape2D.disabled = false
 	
 	if Input.is_action_just_pressed("Dash") && dash.can_dash && !dash.is_dashing():
 		dash.start_dash($AnimatedSprite, DASHDURATION)
@@ -105,6 +118,7 @@ func _physics_process(delta):
 		gravity_on = false
 		set_collision_layer_bit(6, false)
 		set_collision_mask_bit(6, false)
+		#$Hitbox/CollisionShape2D.disabled = true
 		
 	if is_dashing == true && facing_right == true:
 		motion.x = motion.x * speed * delta
@@ -112,6 +126,7 @@ func _physics_process(delta):
 		motion.x = motion.x * speed * delta
 
 
+func combat():
 	# Combat
 	if is_on_floor():
 		if Input.is_action_just_pressed("Attack") && combo_attack == false && cooldown_active == false  && dead == false:
@@ -134,8 +149,6 @@ func _physics_process(delta):
 			
 			$CooldownTimer.start(0.4)
 			cooldown_active = true
-			
-	motion = move_and_slide(motion,UP)
 
 
 func _on_AnimatedSprite_animation_finished():
@@ -166,23 +179,30 @@ func _on_ComboCooldownTimer_timeout():
 func _on_DeathTimer_timeout():
 	get_tree().reload_current_scene()
 
-
+# Hit Detection
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Skeleton") && (hitpoints - 10) <= 0:
 		if dash.is_dashing(): return
+		if $Hitbox/CollisionShape2D.disabled == true: return
 		# motion.x = 0
 		getting_hit = true
 		dead = true
 		is_attacking = false
+		hitpoints = hitpoints - 10
+		health_bar._on_health_updated(hitpoints)
 		$AnimatedSprite.play("Death")
 	elif area.is_in_group("Skeleton") && hitpoints > 0:
 		if dash.is_dashing(): return
+		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true
-		$Effects.play("Hit")
+		$Hitbox/CollisionShape2D.disabled = true
+		$HitEffect.play("Hit")
+		$Blink.play("Blink")
 		hitpoints = hitpoints - 10
+		health_bar._on_health_updated(hitpoints)
 		print_debug("PlayerHealth: " + str(hitpoints))
 
-
-func _on_Effects_animation_finished(anim_name):
-	if anim_name == "Hit":
+func _on_Blink_animation_finished(anim_name):
+		if anim_name == "Blink":
 			getting_hit = false
+			$Hitbox/CollisionShape2D.disabled = false
