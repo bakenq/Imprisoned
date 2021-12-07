@@ -14,7 +14,7 @@
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -80, 775 )
+position = Vector2( -80, 904 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -78,14 +78,14 @@ texture = ExtResource( 8 )
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="EnemySkeleton2" parent="Enemies" instance=ExtResource( 3 )]
-position = Vector2( 621, 775 )
+position = Vector2( 626, 904 )
 
 [node name="EnemySkeleton" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( 272, 712 )
+position = Vector2( 272, 840 )
 z_index = 5
 
 [node name="TileMap" parent="." instance=ExtResource( 10 )]
-position = Vector2( -48, 600 )
+position = Vector2( -48, 728 )
 
 [node name="Collisions" type="Node2D" parent="."]
 
