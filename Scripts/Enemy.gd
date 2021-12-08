@@ -122,6 +122,5 @@ func _on_Effects_animation_finished(anim_name):
 	if anim_name == "Hit":
 			getting_hit = false
 
-
 func _on_PlayerDetectorDelay_timeout():
 	$PlayerDetector/CollisionShape2D.disabled = false

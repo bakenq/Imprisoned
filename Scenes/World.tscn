@@ -20,7 +20,7 @@
 [ext_resource path="res://Assets/npc/man/idle02.png" type="Texture" id=18]
 [ext_resource path="res://Assets/npc/man/idle07.png" type="Texture" id=19]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 19 ) ],
 "loop": true,
@@ -43,8 +43,7 @@ script = ExtResource( 11 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
 position = Vector2( -17, 897.7 )
 scale = Vector2( 0.7, 0.7 )
-frames = SubResource( 3 )
-frame = 1
+frames = SubResource( 1 )
 playing = true
 flip_h = true
 
