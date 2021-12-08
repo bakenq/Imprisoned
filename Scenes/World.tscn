@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Assets/npc/man/idle06.png" type="Texture" id=17]
 [ext_resource path="res://Assets/npc/man/idle02.png" type="Texture" id=18]
 [ext_resource path="res://Assets/npc/man/idle07.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/Collision_Tile.tscn" type="PackedScene" id=20]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -44,6 +45,7 @@ script = ExtResource( 11 )
 position = Vector2( -17, 897.7 )
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 1 )
+frame = 4
 playing = true
 flip_h = true
 
@@ -60,10 +62,10 @@ texture = ExtResource( 13 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2( 1440, 360 )
+motion_mirroring = Vector2( 1440, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 362, -1556 )
+position = Vector2( 362, -744 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 6 )
 
@@ -118,16 +120,62 @@ texture = ExtResource( 8 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="EnemySkeleton2" parent="Enemies" instance=ExtResource( 3 )]
+[node name="EnemySkeletonChase1" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 626, 904 )
 
-[node name="EnemySkeleton" parent="Enemies" instance=ExtResource( 2 )]
+[node name="EnemySkeletonChase2" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 181.248, 643.196 )
+
+[node name="EnemySkeletonChase4" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 127.447, 465.748 )
+
+[node name="EnemySkeletonChase3" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( 261.883, 276.559 )
+
+[node name="EnemySkeletonChase6" parent="Enemies" instance=ExtResource( 3 )]
+position = Vector2( -851.95, 1010.56 )
+
+[node name="EnemySkeleton1" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 272, 840 )
+z_index = 5
+
+[node name="EnemySkeleton4" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -788.522, 630.226 )
+z_index = 5
+
+[node name="EnemySkeleton7" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -649.337, 228.385 )
+z_index = 5
+
+[node name="EnemySkeleton5" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -967.572, 628.107 )
+z_index = 5
+
+[node name="EnemySkeleton2" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 499.127, 612.826 )
+z_index = 5
+
+[node name="EnemySkeleton6" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 978.585, 290.69 )
+z_index = 5
+
+[node name="EnemySkeleton8" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1662.58, 560.333 )
+z_index = 5
+
+[node name="EnemySkeleton3" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( -156.28, 582.125 )
 z_index = 5
 
 [node name="TileMap" parent="." instance=ExtResource( 10 )]
 position = Vector2( -48, 728 )
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
 [node name="Collisions" type="Node2D" parent="."]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="Collision_Tile" parent="Collisions" instance=ExtResource( 20 )]
+light_mask = 0
+position = Vector2( 293.689, 478.345 )
+collision_layer = 102
+collision_mask = 102
