@@ -181,7 +181,7 @@ func _on_DeathTimer_timeout():
 
 # Hit Detection
 func _on_Hitbox_area_entered(area):
-	if area.is_in_group("Skeleton") && (hitpoints - 10) <= 0:
+	if (area.is_in_group("Skeleton") or area.is_in_group("Projectile")) && (hitpoints - 10) <= 0:
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		# motion.x = 0
@@ -191,7 +191,7 @@ func _on_Hitbox_area_entered(area):
 		hitpoints = hitpoints - 10
 		health_bar._on_health_updated(hitpoints)
 		$AnimatedSprite.play("Death")
-	elif area.is_in_group("Skeleton") && hitpoints > 0:
+	elif (area.is_in_group("Skeleton") or area.is_in_group("Projectile")) && hitpoints > 0:
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true

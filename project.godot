@@ -145,6 +145,7 @@ interact={
 2d_physics/layer_4="Player02"
 2d_physics/layer_6="EnvironmentGeneral02"
 2d_physics/layer_7="EnvironmentGeneral03"
+2d_physics/layer_8="Projectile"
 
 [physics]
 

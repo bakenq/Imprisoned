@@ -26,7 +26,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Blink"
 length = 2.0
 tracks/0/type = "value"
@@ -42,10 +42,10 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 6.48156, 14.3657 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 9, 16 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -74,19 +74,21 @@ zoom = Vector2( 0.4, 0.4 )
 anims/Hit = SubResource( 2 )
 
 [node name="Blink" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 5 )
+anims/Blink = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -4, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
-[node name="AttackArea" type="Area2D" parent="." groups=["Sword"]]
+[node name="AttackArea" type="Area2D" parent="." groups=[
+"Sword",
+]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( 8, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="ComboTimer" type="Timer" parent="."]
