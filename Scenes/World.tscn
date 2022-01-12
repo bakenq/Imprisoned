@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Assets/npc/man/idle07.png" type="Texture" id=19]
 [ext_resource path="res://Scenes/Collision_Tile.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scenes/TurretLeft.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -36,7 +37,7 @@ extents = Vector2( 23, 20.8125 )
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -80, 904 )
+position = Vector2( -96, 902.411 )
 
 [node name="NPC" type="Area2D" parent="."]
 position = Vector2( 124, -1 )
@@ -46,7 +47,7 @@ script = ExtResource( 11 )
 position = Vector2( -17, 897.7 )
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 1 )
-frame = 6
+frame = 4
 playing = true
 flip_h = true
 
@@ -183,5 +184,17 @@ collision_mask = 102
 
 [node name="Turrets" type="Node2D" parent="."]
 
-[node name="Turret" parent="Turrets" instance=ExtResource( 21 )]
-position = Vector2( -989.126, 834.828 )
+[node name="TurretLeft1" parent="Turrets" instance=ExtResource( 22 )]
+position = Vector2( -752, 760 )
+
+[node name="TurretLeft2" parent="Turrets" instance=ExtResource( 22 )]
+position = Vector2( -752, 456 )
+
+[node name="TurretRight1" parent="Turrets" instance=ExtResource( 21 )]
+position = Vector2( -1008, 840 )
+
+[node name="TurretRight2" parent="Turrets" instance=ExtResource( 21 )]
+position = Vector2( -1008, 536 )
+
+[node name="TurretRight3" parent="Turrets" instance=ExtResource( 21 )]
+position = Vector2( -1008, 272 )
