@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/attack05.png-667b8071db8cd43877d0b5ce78d861f7.stex"
+path="res://.import/adventurer_01_03.png-e70ef24c4cdefa961ca54f06769d62b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/npc/man/attack05.png"
-dest_files=[ "res://.import/attack05.png-667b8071db8cd43877d0b5ce78d861f7.stex" ]
+source_file="res://Assets/npc/adventurer_01_03.png"
+dest_files=[ "res://.import/adventurer_01_03.png-e70ef24c4cdefa961ca54f06769d62b2.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

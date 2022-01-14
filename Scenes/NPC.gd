@@ -3,11 +3,11 @@ extends Area2D
 var active = false
 
 func _ready():
-	connect("body_entered", self, '_on_NPC_body_entered')
-	connect("body_exited", self, '_on_NPC_body_exited')
+	var _body_entered = connect("body_entered", self, '_on_NPC_body_entered')
+	var _body_exited = connect("body_exited", self, '_on_NPC_body_exited')
 
 
-func _process(delta):
+func _process(_delta):
 	$ExclamationMark.visible = active
 
 
@@ -20,7 +20,7 @@ func _input(event):
 			dialog.connect('timeline_end', self, 'unpause')
 			add_child(dialog)
 
-func unpause(timeline_name):
+func unpause(_timeline_name):
 	get_tree().paused = false
 
 

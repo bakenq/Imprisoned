@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -11,28 +11,26 @@
 [ext_resource path="res://Scripts/CloudLayer.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/NPC.gd" type="Script" id=11]
-[ext_resource path="res://Assets/npc/man/idle04.png" type="Texture" id=12]
+[ext_resource path="res://Assets/npc/adventurer_01_01.png" type="Texture" id=12]
 [ext_resource path="res://Assets/ui/Exclamation mark.png" type="Texture" id=13]
-[ext_resource path="res://Assets/npc/man/idle05.png" type="Texture" id=14]
-[ext_resource path="res://Assets/npc/man/idle01.png" type="Texture" id=15]
-[ext_resource path="res://Assets/npc/man/idle03.png" type="Texture" id=16]
-[ext_resource path="res://Assets/npc/man/idle06.png" type="Texture" id=17]
-[ext_resource path="res://Assets/npc/man/idle02.png" type="Texture" id=18]
-[ext_resource path="res://Assets/npc/man/idle07.png" type="Texture" id=19]
+[ext_resource path="res://Assets/npc/adventurer_01_02.png" type="Texture" id=14]
+[ext_resource path="res://Assets/npc/adventurer_01_04.png" type="Texture" id=15]
+[ext_resource path="res://Assets/npc/adventurer_01_00.png" type="Texture" id=16]
+[ext_resource path="res://Assets/npc/adventurer_01_03.png" type="Texture" id=17]
 [ext_resource path="res://Scenes/Collision_Tile.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/TurretLeft.tscn" type="PackedScene" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 18 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 19 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 23, 20.8125 )
+extents = Vector2( 22, 17.9063 )
 
 [node name="World" type="Node2D"]
 
@@ -44,20 +42,19 @@ position = Vector2( 124, -1 )
 script = ExtResource( 11 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
-position = Vector2( -17, 897.7 )
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( -9, 905 )
+scale = Vector2( 1.1, 1.1 )
 frames = SubResource( 1 )
-frame = 4
+frame = 3
+speed_scale = 0.9
 playing = true
-flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-position = Vector2( -8, 899.813 )
+position = Vector2( -8, 903 )
 shape = SubResource( 2 )
 
 [node name="ExclamationMark" type="Sprite" parent="NPC"]
-visible = false
-position = Vector2( -6, 882 )
+position = Vector2( -9, 882 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 13 )
 

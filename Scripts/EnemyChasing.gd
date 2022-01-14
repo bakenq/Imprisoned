@@ -25,7 +25,7 @@ var dead = false
 var player = null
 
 
-func _physics_process(delta):	
+func _physics_process(_delta):	
 	if is_chasing == true && is_attacking == false:
 		chase()
 	else:
@@ -144,7 +144,7 @@ func knockback():
 	# motion = global_position * knockback_speed
 	motion.x = lerp(global_position.x * knockback_speed, 0, 0.2)
 
-func _on_PlayerDetector_body_entered(body):
+func _on_PlayerDetector_body_entered(_body):
 	is_chasing = false
 	if getting_hit == false && is_attacking == false:
 		if moving_left:
@@ -163,7 +163,7 @@ func _on_PlayerDetector_body_entered(body):
 			is_attacking = true
 
 
-func _on_AttackDetector_body_entered(body):
+func _on_AttackDetector_body_entered(_body):
 	pass
 	#get_tree().reload_current_scene()
 
@@ -226,7 +226,7 @@ func _on_ChaseDetectionRadius_body_entered(body1):
 	print_debug(is_chasing)
 
 
-func _on_ChaseDetectionRadius_body_exited(body1):
+func _on_ChaseDetectionRadius_body_exited(_body1):
 	player = null
 	is_chasing = false
 	print_debug(is_chasing)

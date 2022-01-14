@@ -62,7 +62,7 @@ func _physics_process(delta):
 	
 	move()
 	jump()
-	dash(delta)
+	dashing(delta)
 	combat()
 			
 	motion = move_and_slide(motion,UP)
@@ -101,7 +101,7 @@ func jump():
 		elif motion.y > 0:
 			$AnimatedSprite.play("Fall")
 			
-func dash(delta):
+func dashing(delta):
 	# Dash
 	if dash.is_dashing():
 		speed = DASHSPEED
@@ -177,7 +177,7 @@ func _on_ComboCooldownTimer_timeout():
 	combo_cooldown = false
 	
 func _on_DeathTimer_timeout():
-	get_tree().reload_current_scene()
+	var _reload_scene = get_tree().reload_current_scene()
 
 # Hit Detection
 func _on_Hitbox_area_entered(area):
@@ -195,7 +195,7 @@ func _on_Hitbox_area_entered(area):
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true
-		$Hitbox/CollisionShape2D.disabled = true
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		$HitEffect.play("Hit")
 		$Blink.play("Blink")
 		hitpoints = hitpoints - 10
