@@ -233,3 +233,7 @@ func moveSound():
 			$WalkingRand.play()
 	elif motion.x == 0 && is_on_floor():
 		$WalkingRand.stop()
+
+
+func _on_LevelEnd_area_entered(area):
+	get_tree().reload_current_scene()

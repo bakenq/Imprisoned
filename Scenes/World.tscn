@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -32,6 +32,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9.5, 14.411 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 104, 24 )
+
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -45,7 +48,7 @@ script = ExtResource( 11 )
 position = Vector2( -13.35, 904.625 )
 scale = Vector2( 0.928125, 1.02344 )
 frames = SubResource( 1 )
-frame = 1
+frame = 4
 playing = true
 flip_h = true
 
@@ -55,7 +58,7 @@ shape = SubResource( 2 )
 
 [node name="ExclamationMark" type="Sprite" parent="NPC"]
 visible = false
-position = Vector2( -6, 882 )
+position = Vector2( -13.5, 883.118 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 13 )
 
@@ -177,8 +180,8 @@ position = Vector2( -48, 728 )
 [node name="Collision_Tile" parent="Collisions" instance=ExtResource( 20 )]
 light_mask = 0
 position = Vector2( 293.689, 478.345 )
-collision_layer = 102
-collision_mask = 102
+collision_layer = 6
+collision_mask = 6
 
 [node name="Turrets" type="Node2D" parent="."]
 
@@ -193,3 +196,14 @@ position = Vector2( -1008, 280.309 )
 
 [node name="TurretLeft2" parent="Turrets" instance=ExtResource( 19 )]
 position = Vector2( -752, 456 )
+
+[node name="Trigger" type="Node2D" parent="."]
+
+[node name="LevelEnd" type="Area2D" parent="Trigger"]
+position = Vector2( 1736, -32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger/LevelEnd"]
+position = Vector2( 8, -16 )
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="Trigger/LevelEnd" to="Player" method="_on_LevelEnd_area_entered"]
