@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/amb_waterdrip_3.wav-41c28730989734041b626cc7fde317d7.sample"
+
+[deps]
+
+source_file="res://Sound/amb_waterdrip_3.wav"
+dest_files=[ "res://.import/amb_waterdrip_3.wav-41c28730989734041b626cc7fde317d7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

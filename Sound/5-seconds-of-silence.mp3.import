@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/5-seconds-of-silence.mp3-ff80549fe5995119a25d798f140da94e.mp3str"
+
+[deps]
+
+source_file="res://Sound/5-seconds-of-silence.mp3"
+dest_files=[ "res://.import/5-seconds-of-silence.mp3-ff80549fe5995119a25d798f140da94e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

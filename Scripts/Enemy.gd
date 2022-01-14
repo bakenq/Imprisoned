@@ -18,7 +18,7 @@ var is_attacking = false
 var dead = false
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	move()
 	detect_turn_around()
 
@@ -60,7 +60,7 @@ func knockback():
 	# motion = global_position * knockback_speed
 	motion.x = lerp(global_position.x * knockback_speed, 0, 0.2)
 
-func _on_PlayerDetector_body_entered(_body):
+func _on_PlayerDetector_body_entered(body):
 	if getting_hit == false && is_attacking == false:
 		$AttackAreaDelay.start(0.7)
 		motion.x = 0
@@ -70,7 +70,7 @@ func _on_PlayerDetector_body_entered(_body):
 		is_attacking = true
 
 
-func _on_AttackDetector_body_entered(_body):
+func _on_AttackDetector_body_entered(body):
 	pass
 	#get_tree().reload_current_scene()
 

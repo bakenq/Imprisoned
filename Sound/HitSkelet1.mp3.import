@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/HitSkelet1.mp3-f929b7038f627d8afa852852437c6e71.mp3str"
+
+[deps]
+
+source_file="res://Sound/HitSkelet1.mp3"
+dest_files=[ "res://.import/HitSkelet1.mp3-f929b7038f627d8afa852852437c6e71.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

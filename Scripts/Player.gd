@@ -28,6 +28,7 @@ export var extra_jumps = 1
 var is_attacking = false
 var getting_hit = false
 var dead = false
+var deathsound = 0
 
 var combo_attack = false
 var combo_cooldown = false
@@ -62,19 +63,20 @@ func _physics_process(delta):
 	
 	move()
 	jump()
-	dashing(delta)
+	dash(delta)
 	combat()
-			
 	motion = move_and_slide(motion,UP)
 
 func move():
 	# Movement
-	if Input.is_action_pressed("right") && is_attacking == false && dead == false:
+	if Input.is_action_pressed("right") && is_attacking == false && dead == false: 
 		motion.x += ACCEL
+		moveSound()
 		facing_right = true
 		$AnimatedSprite.play("Run")
 	elif Input.is_action_pressed("left") && is_attacking == false && dead == false:
 		motion.x -= ACCEL
+		moveSound()
 		facing_right = false
 		$AnimatedSprite.play("Run")
 	else:
@@ -86,12 +88,14 @@ func move():
 func jump():
 	# Double Jump
 	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
+		$RandJump.play() #sound
 		if is_attacking == true:
 			is_attacking = false
 			$AnimatedSprite.stop()
 			$AttackArea/CollisionShape2D.disabled = true
 		motion.y = -JUMPFORCE
 		jump_count += 1
+		
 	if is_on_floor():
 		jump_count = 0
 			
@@ -101,7 +105,7 @@ func jump():
 		elif motion.y > 0:
 			$AnimatedSprite.play("Fall")
 			
-func dashing(delta):
+func dash(delta):
 	# Dash
 	if dash.is_dashing():
 		speed = DASHSPEED
@@ -114,6 +118,7 @@ func dashing(delta):
 	
 	if Input.is_action_just_pressed("Dash") && dash.can_dash && !dash.is_dashing():
 		dash.start_dash($AnimatedSprite, DASHDURATION)
+		$DashSound.play() #sound
 		is_dashing = true
 		gravity_on = false
 		set_collision_layer_bit(6, false)
@@ -131,6 +136,7 @@ func combat():
 	if is_on_floor():
 		if Input.is_action_just_pressed("Attack") && combo_attack == false && cooldown_active == false  && dead == false:
 			$AnimatedSprite.play("Attack")
+			$HitSound1.play() #sound
 			is_attacking = true
 			$AttackArea/CollisionShape2D.disabled = false
 			
@@ -140,7 +146,9 @@ func combat():
 			$ComboCooldownTimer.start(0.4)
 			combo_cooldown = true
 		elif Input.is_action_just_pressed("Attack") && combo_attack == true && combo_cooldown == false  && dead == false:
+			
 			$AnimatedSprite.play("Attack2")
+			$HitSound2.play() #Sound
 			is_attacking = true
 			$AttackArea/CollisionShape2D.disabled = false
 			
@@ -177,11 +185,11 @@ func _on_ComboCooldownTimer_timeout():
 	combo_cooldown = false
 	
 func _on_DeathTimer_timeout():
-	var _reload_scene = get_tree().reload_current_scene()
+	get_tree().reload_current_scene()
 
 # Hit Detection
 func _on_Hitbox_area_entered(area):
-	if (area.is_in_group("Skeleton") or area.is_in_group("Projectile")) && (hitpoints - 10) <= 0:
+	if area.is_in_group("Skeleton") && (hitpoints - 10) == 0:
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		# motion.x = 0
@@ -190,12 +198,17 @@ func _on_Hitbox_area_entered(area):
 		is_attacking = false
 		hitpoints = hitpoints - 10
 		health_bar._on_health_updated(hitpoints)
+		deathsound += 1
+		deathmain()
 		$AnimatedSprite.play("Death")
-	elif (area.is_in_group("Skeleton") or area.is_in_group("Projectile")) && hitpoints > 0:
+		
+	elif area.is_in_group("Skeleton") && hitpoints > 0:
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true
-		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
+		$HitMain.play() # sound
+		$Hithurt.play() #sound
+		$Hitbox/CollisionShape2D.disabled = true
 		$HitEffect.play("Hit")
 		$Blink.play("Blink")
 		hitpoints = hitpoints - 10
@@ -206,3 +219,17 @@ func _on_Blink_animation_finished(anim_name):
 		if anim_name == "Blink":
 			getting_hit = false
 			$Hitbox/CollisionShape2D.disabled = false
+
+func deathmain():
+	if deathsound == 1:
+		$DeathSound.play()
+	if deathsound > 1:
+		$DeathSound.stop()
+
+
+func moveSound():
+	if motion.x != 0 && is_on_floor():
+		if !$WalkingRand.playing:
+			$WalkingRand.play()
+	elif motion.x == 0 && is_on_floor():
+		$WalkingRand.stop()

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/BtnUpSound.mp3-9dee8bcfd17a521a38f73c4ed449fc8e.mp3str"
+
+[deps]
+
+source_file="res://Sound/BtnUpSound.mp3"
+dest_files=[ "res://.import/BtnUpSound.mp3-9dee8bcfd17a521a38f73c4ed449fc8e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

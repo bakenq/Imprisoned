@@ -8,8 +8,8 @@ var ghost_scene = preload("res://Scenes/DashGhost.tscn")
 var can_dash = true
 var sprite
 
-func start_dash(sprite2, duration):
-	self.sprite = sprite2
+func start_dash(sprite, duration):
+	self.sprite = sprite
 	
 	duration_timer.wait_time = duration
 	duration_timer.start()

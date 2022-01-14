@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sprung5.mp3-d22c58db2b6971510380fe7e717acea4.mp3str"
+
+[deps]
+
+source_file="res://Sound/Sprung5.mp3"
+dest_files=[ "res://.import/Sprung5.mp3-d22c58db2b6971510380fe7e717acea4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

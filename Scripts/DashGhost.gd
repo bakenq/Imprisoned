@@ -5,5 +5,5 @@ func _ready():
 	$Tween.start()
 
 
-func _on_Tween_tween_completed(_object, _key):
+func _on_Tween_tween_completed(object, key):
 	queue_free()

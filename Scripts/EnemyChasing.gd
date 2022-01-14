@@ -21,11 +21,12 @@ var turning = false
 var getting_hit = false
 var is_attacking = false
 var dead = false
+var deathsoundcount = 0
 
 var player = null
 
 
-func _physics_process(_delta):	
+func _physics_process(delta):	
 	if is_chasing == true && is_attacking == false:
 		chase()
 	else:
@@ -144,7 +145,7 @@ func knockback():
 	# motion = global_position * knockback_speed
 	motion.x = lerp(global_position.x * knockback_speed, 0, 0.2)
 
-func _on_PlayerDetector_body_entered(_body):
+func _on_PlayerDetector_body_entered(body):
 	is_chasing = false
 	if getting_hit == false && is_attacking == false:
 		if moving_left:
@@ -153,6 +154,7 @@ func _on_PlayerDetector_body_entered(_body):
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = 8
 			$AnimatedSprite.play("Attack")
+			$Skt_meleesound.play() #Sound
 			is_attacking = true
 		else:
 			$AttackAreaDelay.start(0.7)
@@ -160,10 +162,11 @@ func _on_PlayerDetector_body_entered(_body):
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = -10
 			$AnimatedSprite.play("Attack")
+			$Skt_meleesound.play() #Sound
 			is_attacking = true
 
 
-func _on_AttackDetector_body_entered(_body):
+func _on_AttackDetector_body_entered(body):
 	pass
 	#get_tree().reload_current_scene()
 
@@ -187,6 +190,8 @@ func _on_Hitbox_area_entered(area):
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")
+		death()
+		#$Deathsound1.play() #sound
 	elif area.is_in_group("Sword") && hitpoints > 0:
 		#$AnimatedSprite.stop()
 		#motion.x = 0
@@ -226,7 +231,7 @@ func _on_ChaseDetectionRadius_body_entered(body1):
 	print_debug(is_chasing)
 
 
-func _on_ChaseDetectionRadius_body_exited(_body1):
+func _on_ChaseDetectionRadius_body_exited(body1):
 	player = null
 	is_chasing = false
 	print_debug(is_chasing)
@@ -238,3 +243,12 @@ func _on_TurnTimer_timeout():
 
 func _on_ChaseDetectionDelay_timeout():
 	$ChaseDetectionRadius/CollisionShape2D.disabled = false
+	
+	
+func death():
+	if $AnimatedSprite.animation == "Death":
+		$Deathsound1.play()
+		deathsoundcount += 1
+	if deathsoundcount == 1:
+		$Deathsound1.stop()
+ 

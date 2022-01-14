@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DeathSkeleton.mp3-94e7f476e061c453b1eb12661c7a3f6d.mp3str"
+
+[deps]
+
+source_file="res://Sound/DeathSkeleton.mp3"
+dest_files=[ "res://.import/DeathSkeleton.mp3-94e7f476e061c453b1eb12661c7a3f6d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

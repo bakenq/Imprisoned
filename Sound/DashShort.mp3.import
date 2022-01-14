@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DashShort.mp3-c48925349a1214d5d46b9d24061f5d7f.mp3str"
+
+[deps]
+
+source_file="res://Sound/DashShort.mp3"
+dest_files=[ "res://.import/DashShort.mp3-c48925349a1214d5d46b9d24061f5d7f.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
