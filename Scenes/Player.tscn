@@ -161,7 +161,6 @@ stream = ExtResource( 19 )
 volume_db = -10.0
 
 [node name="Hithurt" type="AudioStreamPlayer" parent="."]
-bus = "Volumedown"
 script = ExtResource( 5 )
 samples = [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 22 ) ]
 random_strategy = 2
