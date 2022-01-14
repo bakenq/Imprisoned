@@ -8,11 +8,13 @@ func _ready():
 	setup_text()
 	hide_arrows()
 	set_focus_mode(true)
+	
 
 func _process(_delta):
 	if Engine.editor_hint:
 		setup_text()
 		show_arrows()
+		
 	
 func setup_text():
 	$RichTextLabel.bbcode_text = "[center] %s [/center]" % [text]
@@ -32,9 +34,10 @@ func hide_arrows():
 
 func _on_TextureButton_focus_entered():
 	show_arrows()
-
+	
 func _on_TextureButton_focus_exited():
 	hide_arrows()
 
 func _on_TextureButton_mouse_entered():
 	grab_focus()
+
