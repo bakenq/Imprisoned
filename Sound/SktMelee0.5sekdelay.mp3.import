@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SktMelee0.5sekdelay.mp3-e9cc8f126909cfe24e16f19d6d7b4973.mp3str"
+
+[deps]
+
+source_file="res://Sound/SktMelee0.5sekdelay.mp3"
+dest_files=[ "res://.import/SktMelee0.5sekdelay.mp3-e9cc8f126909cfe24e16f19d6d7b4973.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

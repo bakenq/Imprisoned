@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_lth33.ogg-be37969a503f33169fc967d2e9272178.oggstr"
+
+[deps]
+
+source_file="res://Sound/step_lth33.ogg"
+dest_files=[ "res://.import/step_lth33.ogg-be37969a503f33169fc967d2e9272178.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Catchingfire.mp3-9e2c03981499c72553e9dda3b9ec7f02.mp3str"
+
+[deps]
+
+source_file="res://Sound/Catchingfire.mp3"
+dest_files=[ "res://.import/Catchingfire.mp3-9e2c03981499c72553e9dda3b9ec7f02.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

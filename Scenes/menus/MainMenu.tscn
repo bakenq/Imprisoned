@@ -74,6 +74,7 @@ arrow_margin_from_center = 90
 
 [node name="Musik" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -20.0
 autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]

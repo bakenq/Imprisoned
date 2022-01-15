@@ -40,9 +40,11 @@ func move():
 	if moving_left == true && is_attacking == false && getting_hit == false:
 		motion.x = -speed
 		start_Walk()
+		moveSoundSKT()
 	elif moving_left == false && is_attacking == false && getting_hit == false:
 		motion.x = speed
 		start_Walk()
+		moveSoundSKT()
 	else:
 		lerp(motion.x,0,0.1)
 	
@@ -156,6 +158,7 @@ func _on_PlayerDetector_body_entered(body):
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = 8
 			$AnimatedSprite.play("Attack")
+			$Skt_meleesound.play()
 			is_attacking = true
 		else:
 			$AttackAreaDelay.start(0.7)
@@ -163,6 +166,7 @@ func _on_PlayerDetector_body_entered(body):
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = -10
 			$AnimatedSprite.play("Attack")
+			$Skt_meleesound.play()
 			is_attacking = true
 
 
@@ -256,6 +260,7 @@ func deathsoundstopskt():
 func moveSoundSKT():
 	if motion.x != 0 && is_on_floor():
 		if !$Skt_Walking.playing:
+			$Skt_Walking.pitch_scale = rand_range(0.8, 1.0)
 			$Skt_Walking.play()
 	elif motion.x == 0 && is_on_floor():
 		$Skt_Walking.stop()

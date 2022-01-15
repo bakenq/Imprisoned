@@ -206,7 +206,8 @@ func _on_Hitbox_area_entered(area):
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true
-		$HitMain.play() # sound
+		hitbyfire(area) #sound
+		hitbyskt(area) #sound
 		$Hithurt.play() #sound
 		$Hitbox/CollisionShape2D.disabled = true
 		$HitEffect.play("Hit")
@@ -233,6 +234,16 @@ func moveSound():
 			$WalkingRand.play()
 	elif motion.x == 0 && is_on_floor():
 		$WalkingRand.stop()
+
+func hitbyskt(area):
+	if (area.is_in_group("Skeleton") && hitpoints > 0):
+		$HitMain.play()
+		
+		
+func hitbyfire(area):
+	if (area.is_in_group("Projectile") && hitpoints > 0):
+		$HitFire.pitch_scale = rand_range(0.8, 1.0)
+		$HitFire.play()
 
 
 func _on_LevelEnd_area_entered(area):

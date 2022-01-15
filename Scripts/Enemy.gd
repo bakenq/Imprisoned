@@ -16,7 +16,7 @@ var is_moving = false
 var getting_hit = false
 var is_attacking = false
 var dead = false
-
+var deathsound = 0  
 
 func _physics_process(delta):
 	move()
@@ -29,9 +29,11 @@ func move():
 	if moving_left == true && is_attacking == false && getting_hit == false:
 		motion.x = -speed
 		start_Walk()
+		moveSoundSKT()
 	elif moving_left == false && is_attacking == false && getting_hit == false:
 		motion.x = speed
 		start_Walk()
+		moveSoundSKT()
 	else:
 		lerp(motion.x,0,0.1)
 	
@@ -67,6 +69,7 @@ func _on_PlayerDetector_body_entered(body):
 		$AnimatedSprite.offset.y = -2
 		$AnimatedSprite.offset.x = 8
 		$AnimatedSprite.play("Attack")
+		$Skt_meleesound.play()
 		is_attacking = true
 
 
@@ -94,6 +97,8 @@ func _on_Hitbox_area_entered(area):
 		getting_hit = true
 		dead = true
 		is_attacking = false
+		deathsound += 1 #sound
+		deathsoundstopskt() #sound
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")
@@ -101,6 +106,7 @@ func _on_Hitbox_area_entered(area):
 		#$AnimatedSprite.stop()
 		#motion.x = 0
 		getting_hit = true
+		$Skt_gettinghit.play()
 		#knockback()
 		#$AnimatedSprite.play("GetHit")
 		$Effects.play("Hit")
@@ -124,3 +130,17 @@ func _on_Effects_animation_finished(anim_name):
 
 func _on_PlayerDetectorDelay_timeout():
 	$PlayerDetector/CollisionShape2D.disabled = false
+	
+func deathsoundstopskt():
+	if deathsound == 1:
+		$Deathsound1.play()
+	if deathsound > 1:
+		$Deathsound1.stop()
+
+func moveSoundSKT():
+	if motion.x != 0 && is_on_floor():
+		if !$Skt_Walking.playing:
+			$Skt_Walking.pitch_scale = rand_range(0.8, 1.0)
+			$Skt_Walking.play()
+	elif motion.x == 0 && is_on_floor():
+		$Skt_Walking.stop()
