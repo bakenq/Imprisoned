@@ -143,7 +143,7 @@ func combat():
 			$ComboTimer.start(1.5)
 			combo_attack = true
 			
-			$ComboCooldownTimer.start(0.4)
+			$ComboCooldownTimer.start(0.5)
 			combo_cooldown = true
 		elif Input.is_action_just_pressed("Attack") && combo_attack == true && combo_cooldown == false  && dead == false:
 			
@@ -189,7 +189,7 @@ func _on_DeathTimer_timeout():
 
 # Hit Detection
 func _on_Hitbox_area_entered(area):
-	if area.is_in_group("Skeleton") && (hitpoints - 10) == 0:
+	if (area.is_in_group("Skeleton") && (hitpoints - 10) == 0) or (area.is_in_group("Projectile") && (hitpoints - 10) == 0):
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		# motion.x = 0
@@ -202,11 +202,12 @@ func _on_Hitbox_area_entered(area):
 		deathmain()
 		$AnimatedSprite.play("Death")
 		
-	elif area.is_in_group("Skeleton") && hitpoints > 0:
+	elif (area.is_in_group("Skeleton") && hitpoints > 0) or (area.is_in_group("Projectile") && hitpoints > 0):
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		getting_hit = true
-		$HitMain.play() # sound
+		hitbyfire(area) #sound
+		hitbyskt(area) #sound
 		$Hithurt.play() #sound
 		$Hitbox/CollisionShape2D.disabled = true
 		$HitEffect.play("Hit")
@@ -233,3 +234,17 @@ func moveSound():
 			$WalkingRand.play()
 	elif motion.x == 0 && is_on_floor():
 		$WalkingRand.stop()
+
+func hitbyskt(area):
+	if (area.is_in_group("Skeleton") && hitpoints > 0):
+		$HitMain.play()
+		
+		
+func hitbyfire(area):
+	if (area.is_in_group("Projectile") && hitpoints > 0):
+		$HitFire.pitch_scale = rand_range(0.8, 1.0)
+		$HitFire.play()
+
+
+func _on_LevelEnd_area_entered(area):
+	get_tree().reload_current_scene()

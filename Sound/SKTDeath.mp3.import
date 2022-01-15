@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SKTDeath.mp3-92d4ff4b9578542c61ba0725f5c65b56.mp3str"
+
+[deps]
+
+source_file="res://Sound/SKTDeath.mp3"
+dest_files=[ "res://.import/SKTDeath.mp3-92d4ff4b9578542c61ba0725f5c65b56.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

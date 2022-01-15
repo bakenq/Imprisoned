@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/SKTStrikewithdelay.mp3-c08f31b2499328d162f75ee24bed24f3.mp3str"
+
+[deps]
+
+source_file="res://Sound/SKTStrikewithdelay.mp3"
+dest_files=[ "res://.import/SKTStrikewithdelay.mp3-c08f31b2499328d162f75ee24bed24f3.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

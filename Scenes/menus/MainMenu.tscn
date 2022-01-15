@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/menus/MenuButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/menus/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/fonts/alagard.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Assets/ui/Y1yIQ.jpeg" type="Texture" id=4]
-[ext_resource path="res://Sound/HintergrundMusik.mp3" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -71,10 +70,6 @@ focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Start")
 text = "Exit"
 arrow_margin_from_center = 90
-
-[node name="Musik" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
