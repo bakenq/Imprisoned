@@ -12,6 +12,7 @@ script = ExtResource( 1 )
 
 [node name="Fireball" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+volume_db = -10.097
 max_distance = 500.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
