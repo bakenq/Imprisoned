@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HintergurndMusikAmbiente.wav-e07f3737375c45ad84e9d9cfa3cdea87.sample"
+
+[deps]
+
+source_file="res://Sound/HintergurndMusikAmbiente.wav"
+dest_files=[ "res://.import/HintergurndMusikAmbiente.wav-e07f3737375c45ad84e9d9cfa3cdea87.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

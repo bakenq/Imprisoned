@@ -10,10 +10,13 @@ func _physics_process(delta):
 	var direction = RIGHT.rotated(rotation) * speed * delta
 	global_position += direction
 
+	
+
 
 func destroy():
 	queue_free()
-
+	
+	
 func _on_Fireball_area_entered(_area):
 	destroy()
 
