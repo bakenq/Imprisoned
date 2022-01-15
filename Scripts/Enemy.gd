@@ -68,9 +68,10 @@ func _on_PlayerDetector_body_entered(body):
 		motion.x = 0
 		$AnimatedSprite.offset.y = -2
 		$AnimatedSprite.offset.x = 8
-		$AnimatedSprite.play("Attack")
-		$Skt_meleesound.play()
-		is_attacking = true
+		if dead == false:
+			$AnimatedSprite.play("Attack")
+			$Skt_meleesound.play()
+			is_attacking = true
 
 
 func _on_AttackDetector_body_entered(body):
@@ -99,6 +100,8 @@ func _on_Hitbox_area_entered(area):
 		is_attacking = false
 		deathsound += 1 #sound
 		deathsoundstopskt() #sound
+		$AttackAreaDelay.stop()
+		$AttackDetector/CollisionShape2D.disabled = true
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")

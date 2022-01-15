@@ -143,7 +143,7 @@ func combat():
 			$ComboTimer.start(1.5)
 			combo_attack = true
 			
-			$ComboCooldownTimer.start(0.4)
+			$ComboCooldownTimer.start(0.5)
 			combo_cooldown = true
 		elif Input.is_action_just_pressed("Attack") && combo_attack == true && combo_cooldown == false  && dead == false:
 			
