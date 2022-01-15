@@ -7,7 +7,7 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 1, 1, 1, 1 )
-anti_aliasing_size = 5
+anti_aliasing_size = 5.0
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.772549, 0.121569, 0.121569, 1 )
@@ -16,7 +16,7 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.8, 0.8, 0.8, 0 )
-anti_aliasing_size = 5
+anti_aliasing_size = 5.0
 
 [resource]
 ProgressBar/colors/font_color = Color( 0.94, 0.94, 0.94, 1 )
