@@ -105,6 +105,10 @@ func jump():
 		elif motion.y > 0:
 			$AnimatedSprite.play("Fall")
 			
+	if !is_on_floor() && dead == true:
+		$AnimatedSprite.stop()
+		
+			
 func dash(delta):
 	# Dash
 	if dash.is_dashing():
@@ -169,7 +173,8 @@ func _on_AnimatedSprite_animation_finished():
 		is_attacking = false
 	
 	if $AnimatedSprite.animation == "Death":
-		$DeathTimer.start(3.0)
+		pass
+		#$DeathTimer.start(3.0)
 		#queue_free()
 
 
@@ -200,7 +205,9 @@ func _on_Hitbox_area_entered(area):
 		health_bar._on_health_updated(hitpoints)
 		deathsound += 1
 		deathmain()
+		$AnimatedSprite.stop()
 		$AnimatedSprite.play("Death")
+		$DeathTimer.start(3.0)
 		
 	elif (area.is_in_group("Skeleton") && hitpoints > 0) or (area.is_in_group("Projectile") && hitpoints > 0):
 		if dash.is_dashing(): return

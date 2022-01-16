@@ -68,6 +68,7 @@ func _on_PlayerDetector_body_entered(body):
 		motion.x = 0
 		$AnimatedSprite.offset.y = -2
 		$AnimatedSprite.offset.x = 8
+		$Hitbox/CollisionShape2D.position.x = -3
 		if dead == false:
 			$AnimatedSprite.play("Attack")
 			$Skt_meleesound.play()

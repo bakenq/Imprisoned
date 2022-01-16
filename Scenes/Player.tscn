@@ -65,7 +65,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 6.48156, 14.3657 )
+extents = Vector2( 7.91337, 14.3657 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 9, 16 )
@@ -83,7 +83,6 @@ frames = ExtResource( 1 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -4, 1 )
 shape = SubResource( 1 )
 

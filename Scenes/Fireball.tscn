@@ -3,7 +3,8 @@
 [ext_resource path="res://Scripts/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Fireball/FB001.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.5, 8.625 )
 
 [node name="Fireball" type="Area2D" groups=[
 "Projectile",
@@ -17,6 +18,7 @@ position = Vector2( -10, 0 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.75 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
