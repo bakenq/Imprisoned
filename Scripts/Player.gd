@@ -24,6 +24,7 @@ var is_dashing = false
 
 var jump_count = 0
 export var extra_jumps = 1
+var can_jump = true
 
 var is_attacking = false
 var getting_hit = false
@@ -88,18 +89,23 @@ func move():
 func jump():
 	# Double Jump
 	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
-		$RandJump.play() #sound
-		if is_attacking == true:
-			is_attacking = false
-			$AnimatedSprite.stop()
-			$AttackArea/CollisionShape2D.disabled = true
-		motion.y = -JUMPFORCE
-		jump_count += 1
+		if can_jump == true:
+			$RandJump.play() #sound
+			if is_attacking == true:
+				is_attacking = false
+				$AnimatedSprite.stop()
+				$AttackArea/CollisionShape2D.disabled = true
+			motion.y = -JUMPFORCE
+			jump_count = jump_count + 1
+	
+	
 		
 	if is_on_floor():
+		can_jump = true
 		jump_count = 0
 			
 	if !is_on_floor():
+		coyoteTime()
 		if motion.y < 0:
 			$AnimatedSprite.play("Jump")
 		elif motion.y > 0:
@@ -255,3 +261,8 @@ func hitbyfire(area):
 
 func _on_LevelEnd_area_entered(area):
 	get_tree().reload_current_scene()
+	
+func coyoteTime():
+	yield(get_tree().create_timer(.1), "timeout")
+	if jump_count == 1:
+		can_jump = false
