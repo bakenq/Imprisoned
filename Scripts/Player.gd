@@ -25,6 +25,8 @@ var is_dashing = false
 var jump_count = 0
 export var extra_jumps = 1
 var can_jump = true
+var can_jump1 = true
+var double_jump = false
 
 var is_attacking = false
 var getting_hit = false
@@ -36,6 +38,7 @@ var combo_cooldown = false
 var cooldown_active = false
 
 func _ready():
+	can_jump = true
 	pass
 
 
@@ -88,20 +91,33 @@ func move():
 			
 func jump():
 	# Double Jump
-	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
-		if can_jump == true:
-			$RandJump.play() #sound
-			if is_attacking == true:
-				is_attacking = false
-				$AnimatedSprite.stop()
-				$AttackArea/CollisionShape2D.disabled = true
-			motion.y = -JUMPFORCE
-			jump_count = jump_count + 1
 	
+	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
+	#if Input.is_action_just_pressed("jump") && can_jump == true && can_jump1 == true:
+		$RandJump.play() #sound
+		if is_attacking == true:
+			is_attacking = false
+			$AnimatedSprite.stop()
+			$AttackArea/CollisionShape2D.disabled = true
+		motion.y = -JUMPFORCE
+		jump_count = jump_count + 1
+		#double_jump = true
+		#can_jump = false
+		#can_jump1 = false
+		$JumpDelay.start(0.1)
+	elif Input.is_action_just_pressed("jump") && double_jump == true:
+		$RandJump.play() #sound
+		if is_attacking == true:
+			is_attacking = false
+			$AnimatedSprite.stop()
+			$AttackArea/CollisionShape2D.disabled = true
+		motion.y = -JUMPFORCE
+		double_jump = false
 	
 		
 	if is_on_floor():
 		can_jump = true
+		double_jump = false
 		jump_count = 0
 			
 	if !is_on_floor():
@@ -263,6 +279,12 @@ func _on_LevelEnd_area_entered(area):
 	get_tree().reload_current_scene()
 	
 func coyoteTime():
-	yield(get_tree().create_timer(.1), "timeout")
-	if jump_count == 1:
-		can_jump = false
+	$CoyoteTimer.start(0.1)
+
+func _on_CoyoteTimer_timeout():
+	can_jump = false
+	double_jump = true
+
+
+func _on_JumpDelay_timeout():
+	can_jump1 = true
