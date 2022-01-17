@@ -468,24 +468,23 @@ extents = Vector2( 96, 31 )
 position = Vector2( -80, 904 )
 
 [node name="NPC" type="Area2D" parent="."]
-position = Vector2( 124, -1 )
+position = Vector2( -7.5, 904 )
 script = ExtResource( 11 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
-position = Vector2( -124, 903.411 )
+position = Vector2( 0, -6.10352e-05 )
 scale = Vector2( 1.00625, 1.07812 )
 frames = SubResource( 1 )
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-position = Vector2( -124, 903.411 )
 shape = SubResource( 2 )
 
 [node name="ExclamationMark" type="Sprite" parent="NPC"]
 visible = false
-position = Vector2( -124, 881 )
+position = Vector2( 0, -24 )
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 13 )
 
@@ -587,6 +586,10 @@ z_index = 5
 
 [node name="EnemySkeleton6" parent="Enemies" instance=ExtResource( 2 )]
 position = Vector2( 978.585, 290.69 )
+z_index = 5
+
+[node name="EnemySkeleton9" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 1608, 400 )
 z_index = 5
 
 [node name="EnemySkeleton8" parent="Enemies" instance=ExtResource( 2 )]

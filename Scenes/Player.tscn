@@ -28,9 +28,8 @@
 [ext_resource path="res://Shader/HitEffect.tres" type="Material" id=28]
 [ext_resource path="res://Scenes/Dash.tscn" type="PackedScene" id=33]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 7.0
-height = 16.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.16267, 14.9712 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hit"
