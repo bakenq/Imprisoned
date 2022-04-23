@@ -8,6 +8,7 @@ func _ready():
 	pass # Replace with function body.
 	
 func _physics_process(_delta):
+	$AnimationPlayer.play("buildup")
 	if ready:
 		shoot()
 
@@ -17,8 +18,7 @@ func shoot():
 	fireball.global_position = global_position
 	ready = false
 	$Fireball.play()
-		
-	$Timer.start(2.0)
 
-func _on_Timer_timeout():
+
+func _on_AnimationPlayer_animation_finished(buildup):
 	ready = true

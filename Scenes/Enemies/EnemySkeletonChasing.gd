@@ -58,6 +58,7 @@ func chase():
 	if moving_left == true:
 		$AnimatedSprite.flip_h = false
 		$CollisionShape2D.position.x = 5
+		$CollisionShape2D2.position.x = 5
 		
 		$RayCast2D_Down.position.x = -22
 		$RayCast2D_Side.position.x = -6.25
@@ -70,6 +71,7 @@ func chase():
 	elif moving_left == false:
 		$AnimatedSprite.flip_h = true
 		$CollisionShape2D.position.x = 0
+		$CollisionShape2D2.position.x = 0
 		
 		$RayCast2D_Down.position.x = 22
 		$RayCast2D_Side.position.x = 9.25
@@ -110,6 +112,7 @@ func detect_turn_around():
 			
 			$AnimatedSprite.flip_h = true
 			$CollisionShape2D.position.x = 0
+			$CollisionShape2D2.position.x = 0
 		
 			$RayCast2D_Down.position.x = 22
 			$RayCast2D_Side.position.x = 9.25
@@ -126,6 +129,7 @@ func detect_turn_around():
 			
 			$AnimatedSprite.flip_h = false
 			$CollisionShape2D.position.x = 5
+			$CollisionShape2D2.position.x = 5
 		
 			$RayCast2D_Down.position.x = -22
 			$RayCast2D_Side.position.x = -6.25

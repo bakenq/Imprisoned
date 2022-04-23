@@ -3,12 +3,15 @@ extends Area2D
 export var speed = 250
 const RIGHT = Vector2.RIGHT
 
+var ready = false
+
 func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	var direction = RIGHT.rotated(rotation) * speed * delta
-	global_position += direction
+	
+		var direction = RIGHT.rotated(rotation) * speed * delta
+		global_position += direction
 
 	
 
@@ -31,3 +34,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_ResetTimer_timeout():
 	pass # Replace with function body.
+
+
+func _on_BuildupTimer_timeout():
+	pass
+	#ready = true

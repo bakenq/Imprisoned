@@ -29,7 +29,7 @@
 [ext_resource path="res://Scenes/Dash.tscn" type="PackedScene" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.16267, 14.9712 )
+extents = Vector2( 6.16267, 15.3217 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Hit"
@@ -82,7 +82,7 @@ frames = ExtResource( 1 )
 animation = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -4, 1 )
+position = Vector2( -3.94101, 0.648918 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -97,6 +97,7 @@ anims/Hit = SubResource( 2 )
 anims/Blink = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -4, 1 )
@@ -105,6 +106,7 @@ shape = SubResource( 4 )
 [node name="AttackArea" type="Area2D" parent="." groups=[
 "Sword",
 ]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( 8, 0 )

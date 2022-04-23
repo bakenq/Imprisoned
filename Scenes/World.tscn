@@ -465,7 +465,7 @@ extents = Vector2( 96, 31 )
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -80, 904 )
+position = Vector2( -77.9448, 902.411 )
 
 [node name="NPC" type="Area2D" parent="."]
 position = Vector2( -7.5, 904 )
