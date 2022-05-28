@@ -15,7 +15,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "buildup"
 length = 2.0
 tracks/0/type = "value"
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 13.5, 8.625 )
 
 [node name="Fireball" type="Area2D" groups=[
@@ -49,7 +49,7 @@ frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/buildup = SubResource( 3 )
+anims/buildup = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -58,7 +58,7 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1.75 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

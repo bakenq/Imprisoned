@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var HEART = preload("res://Scenes/Heart.tscn")
+
 # Constants
 const GRAVITY = 20
 const UP = Vector2.UP
@@ -47,6 +49,11 @@ func detect_turn_around():
 	if $RayCast2D_Side.is_colliding() and is_on_floor():
 		moving_left = !moving_left
 		scale.x = -scale.x
+		
+func spawn_heart():
+	var heart: Node2D = HEART.instance()
+	get_tree().current_scene.add_child(heart)
+	heart.global_position = global_position
 
 func hit():
 	$AttackDetector.monitoring = true
@@ -106,6 +113,8 @@ func _on_Hitbox_area_entered(area):
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")
+		spawn_heart()
+		
 	elif area.is_in_group("Sword") && hitpoints > 0:
 		#$AnimatedSprite.stop()
 		#motion.x = 0

@@ -216,14 +216,14 @@ func _on_DeathTimer_timeout():
 
 # Hit Detection
 func _on_Hitbox_area_entered(area):
-	if (area.is_in_group("Skeleton") && (hitpoints - 10) == 0) or (area.is_in_group("Projectile") && (hitpoints - 10) == 0):
+	if (area.is_in_group("Skeleton") && (hitpoints - 20) == 0) or (area.is_in_group("Projectile") && (hitpoints - 20) == 0):
 		if dash.is_dashing(): return
 		if $Hitbox/CollisionShape2D.disabled == true: return
 		# motion.x = 0
 		getting_hit = true
 		dead = true
 		is_attacking = false
-		hitpoints = hitpoints - 10
+		hitpoints = hitpoints - 20
 		health_bar._on_health_updated(hitpoints)
 		deathsound += 1
 		deathmain()
@@ -241,9 +241,15 @@ func _on_Hitbox_area_entered(area):
 		$Hitbox/CollisionShape2D.disabled = true
 		$HitEffect.play("Hit")
 		$Blink.play("Blink")
-		hitpoints = hitpoints - 10
+		hitpoints = hitpoints - 20
 		health_bar._on_health_updated(hitpoints)
 		print_debug("PlayerHealth: " + str(hitpoints))
+		
+	elif (area.is_in_group("Heart")):
+		hitpoints = hitpoints + 20
+		health_bar._on_health_updated(hitpoints)
+		if (hitpoints > 100):
+			hitpoints = 100
 
 func _on_Blink_animation_finished(anim_name):
 		if anim_name == "Blink":
