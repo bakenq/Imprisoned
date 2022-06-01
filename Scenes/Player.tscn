@@ -129,6 +129,9 @@ one_shot = true
 
 [node name="JumpDelay" type="Timer" parent="."]
 
+[node name="simulTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Dash" parent="." instance=ExtResource( 33 )]
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
@@ -186,3 +189,4 @@ volume_db = -15.0
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_CoyoteTimer_timeout"]
 [connection signal="timeout" from="JumpDelay" to="." method="_on_JumpDelay_timeout"]
+[connection signal="timeout" from="simulTimer" to="." method="_on_simulTimer_timeout"]

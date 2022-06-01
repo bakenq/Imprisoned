@@ -16,6 +16,8 @@ onready var health_bar = $HealthBar
 export var hitpoints = 100
 
 # Movement/States
+var can_press = true
+
 var motion = Vector2()
 var speed = 0
 var gravity_on = true
@@ -27,6 +29,7 @@ export var extra_jumps = 1
 var can_jump = true
 var can_jump1 = true
 var double_jump = false
+var is_falling = false
 
 var is_attacking = false
 var getting_hit = false
@@ -92,8 +95,11 @@ func move():
 func jump():
 	# Double Jump
 	
-	if Input.is_action_just_pressed("jump") && jump_count < extra_jumps && dead == false:
+	if Input.is_action_just_pressed("jump") and jump_count < extra_jumps and dead == false and can_press == true:
 	#if Input.is_action_just_pressed("jump") && can_jump == true && can_jump1 == true:
+		$simulTimer.start(0.05)
+		can_press = false
+	
 		$RandJump.play() #sound
 		if is_attacking == true:
 			is_attacking = false
@@ -105,7 +111,10 @@ func jump():
 		#can_jump = false
 		#can_jump1 = false
 		$JumpDelay.start(0.1)
-	elif Input.is_action_just_pressed("jump") && double_jump == true:
+	elif Input.is_action_just_pressed("jump") and double_jump == true and can_press == true:
+		$simulTimer.start(0.05)
+		can_press = false
+		
 		$RandJump.play() #sound
 		if is_attacking == true:
 			is_attacking = false
@@ -119,16 +128,22 @@ func jump():
 		can_jump = true
 		double_jump = false
 		jump_count = 0
+		is_falling = false
 			
 	if !is_on_floor():
 		coyoteTime()
 		if motion.y < 0:
+			is_falling = false
 			$AnimatedSprite.play("Jump")
 		elif motion.y > 0:
+			is_falling = true
+			
+		if is_falling == true:
 			$AnimatedSprite.play("Fall")
 			
 	if !is_on_floor() && dead == true:
-		$AnimatedSprite.stop()
+		#AnimatedSprite.stop()
+		$AnimatedSprite.play("Death")
 		
 			
 func dash(delta):
@@ -142,10 +157,14 @@ func dash(delta):
 		set_collision_mask_bit(6, true)
 		#$Hitbox/CollisionShape2D.disabled = false
 	
-	if Input.is_action_just_pressed("Dash") && dash.can_dash && !dash.is_dashing():
+	if Input.is_action_just_pressed("Dash") and dash.can_dash and !dash.is_dashing() and can_press == true:
+		$simulTimer.start(0.05)
+		can_press = false
+		
 		dash.start_dash($AnimatedSprite, DASHDURATION)
 		$DashSound.play() #sound
 		is_dashing = true
+		is_attacking = false
 		gravity_on = false
 		set_collision_layer_bit(6, false)
 		set_collision_mask_bit(6, false)
@@ -160,7 +179,10 @@ func dash(delta):
 func combat():
 	# Combat
 	if is_on_floor():
-		if Input.is_action_just_pressed("Attack") && combo_attack == false && cooldown_active == false  && dead == false:
+		if Input.is_action_just_pressed("Attack") and combo_attack == false and cooldown_active == false and dead == false and can_press == true:
+			$simulTimer.start(0.05)
+			can_press = false
+			
 			$AnimatedSprite.play("Attack")
 			$HitSound1.play() #sound
 			is_attacking = true
@@ -171,7 +193,9 @@ func combat():
 			
 			$ComboCooldownTimer.start(0.5)
 			combo_cooldown = true
-		elif Input.is_action_just_pressed("Attack") && combo_attack == true && combo_cooldown == false  && dead == false:
+		elif Input.is_action_just_pressed("Attack") and combo_attack == true and combo_cooldown == false and dead == false and can_press == true:
+			$simulTimer.start(0.05)
+			can_press = false
 			
 			$AnimatedSprite.play("Attack2")
 			$HitSound2.play() #Sound
@@ -294,3 +318,7 @@ func _on_CoyoteTimer_timeout():
 
 func _on_JumpDelay_timeout():
 	can_jump1 = true
+
+
+func _on_simulTimer_timeout():
+	can_press = true
