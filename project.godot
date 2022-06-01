@@ -63,6 +63,7 @@ config/icon="res://icon.png"
 [autoload]
 
 MusicController="*res://Autoload/MusicController.tscn"
+Pause="*res://Autoload/Pause.tscn"
 
 [display]
 
