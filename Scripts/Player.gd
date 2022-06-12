@@ -303,6 +303,10 @@ func hitbyfire(area):
 	if (area.is_in_group("Projectile") && hitpoints > 0):
 		$HitFire.pitch_scale = rand_range(0.8, 1.0)
 		$HitFire.play()
+		
+func heartpickup(area): #Hier nochmal wegen der area schauen was stimmt
+	if (area.is_in_group("Heart")):
+		$heartpickup.play()
 
 
 func _on_LevelEnd_area_entered(area):

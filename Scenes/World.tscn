@@ -1294,7 +1294,6 @@ script = ExtResource( 11 )
 position = Vector2( 0, -6.10352e-05 )
 scale = Vector2( 1.00625, 1.07812 )
 frames = SubResource( 1 )
-frame = 4
 playing = true
 flip_h = true
 
@@ -1493,4 +1492,4 @@ position = Vector2( 1136, 488 )
 position = Vector2( 1136, 376 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.34902, 0.396078, 0.423529, 1 )
+color = Color( 0.603922, 0.682353, 0.737255, 1 )

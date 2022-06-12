@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Turret.gd" type="Script" id=1]
 [ext_resource path="res://Sound/Fireball.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Fireball/FB001.png" type="Texture" id=3]
+[ext_resource path="res://Images/light.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "buildup"
@@ -24,8 +25,12 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1e-05, 1e-05 )
+scale = Vector2( 0.250008, 0.250008 )
 texture = ExtResource( 3 )
+
+[node name="SpriteLight" type="Light2D" parent="Sprite"]
+texture = ExtResource( 4 )
+color = Color( 0.933333, 0.443137, 0.176471, 1 )
 
 [node name="Fireball" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
