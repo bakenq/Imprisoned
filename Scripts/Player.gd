@@ -272,6 +272,7 @@ func _on_Hitbox_area_entered(area):
 	elif (area.is_in_group("Heart")):
 		hitpoints = hitpoints + 20
 		health_bar._on_health_updated(hitpoints)
+		$heartpickup.play()
 		if (hitpoints > 100):
 			hitpoints = 100
 
