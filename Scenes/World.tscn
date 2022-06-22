@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/TurretLeft.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Plattform.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/Enemies/EnemySkeletonBoss.tscn" type="PackedScene" id=24]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -1491,7 +1492,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 48, 0, 48 )
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -90.752, 902.411 )
+position = Vector2( -90, 903 )
 
 [node name="NPC" type="Area2D" parent="."]
 position = Vector2( -7.5, 904 )
@@ -1626,6 +1627,9 @@ z_index = 5
 position = Vector2( -156.28, 580.536 )
 z_index = 5
 
+[node name="EnemySkeletonBoss" parent="Enemies" instance=ExtResource( 24 )]
+position = Vector2( 796, -75.3331 )
+
 [node name="TileMap" parent="." instance=ExtResource( 10 )]
 position = Vector2( -48, 728 )
 
@@ -1663,8 +1667,6 @@ tile_data = PoolIntArray( -2424854, 12, 0, -2490344, 9, 0, -2490295, 2, 0, -2490
 [node name="Collision_Tile" parent="Collisions" instance=ExtResource( 20 )]
 light_mask = 0
 position = Vector2( 293.689, 472 )
-collision_layer = 6
-collision_mask = 6
 
 [node name="Turrets" type="Node2D" parent="."]
 
@@ -1705,3 +1707,9 @@ color = Color( 0.603922, 0.682353, 0.737255, 1 )
 
 [node name="Platform1" parent="MovingPlattforms" instance=ExtResource( 23 )]
 position = Vector2( -527.933, 256.093 )
+
+[node name="Collision_Tile2" parent="." instance=ExtResource( 20 )]
+position = Vector2( 955.271, -44.5392 )
+
+[node name="Collision_Tile" parent="." instance=ExtResource( 20 )]
+position = Vector2( 619.75, -49.3511 )

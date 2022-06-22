@@ -101,7 +101,6 @@ anims/Blink = SubResource( 3 )
 [node name="Hitbox" type="Area2D" parent="." groups=[
 "Player",
 ]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -4, 1 )
@@ -110,7 +109,6 @@ shape = SubResource( 4 )
 [node name="AttackArea" type="Area2D" parent="." groups=[
 "Sword",
 ]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2( 8, 0 )

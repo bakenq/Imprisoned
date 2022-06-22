@@ -1,7 +1,7 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://Assets/Skeleton/Sprite Sheets/Skeleton Idle.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Boss.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Skeleton/Sprite Sheets/Skeleton Walk.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Skeleton/Sprite Sheets/Skeleton Attack.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Skeleton/Sprite Sheets/Skeleton Hit.png" type="Texture" id=5]
@@ -19,6 +19,7 @@
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player.gd" type="Script" id=17]
 [ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_2D.gd" type="Script" id=18]
 [ext_resource path="res://Images/light.png" type="Texture" id=19]
+[ext_resource path="res://Scenes/TurretBoss.tscn" type="PackedScene" id=20]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 5 )
@@ -326,10 +327,14 @@ tracks/0/keys = {
 
 [sub_resource type="CapsuleShape2D" id=68]
 radius = 8.55485
-height = 6.90987
+height = 1.31872
+
+[sub_resource type="CapsuleShape2D" id=72]
+radius = 4.71553
+height = 10.516
 
 [sub_resource type="RectangleShape2D" id=69]
-extents = Vector2( 8.55485, 9.50754 )
+extents = Vector2( 7.75923, 12.0147 )
 
 [sub_resource type="RectangleShape2D" id=70]
 extents = Vector2( 10.5014, 15.4946 )
@@ -338,10 +343,10 @@ extents = Vector2( 10.5014, 15.4946 )
 extents = Vector2( 13.0402, 14.6136 )
 
 [node name="EnemySkeleton" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
 collision_layer = 68
 collision_mask = 68
 script = ExtResource( 2 )
-hitpoints = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 7 )
@@ -349,18 +354,19 @@ position = Vector2( 3, 0 )
 scale = Vector2( -1, 1 )
 frames = SubResource( 66 )
 animation = "Walk"
-frame = 11
+frame = 8
+playing = true
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 anims/Hit = SubResource( 67 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( 4.98277, 3.68799 )
+position = Vector2( 4.98277, 1.32762 )
 shape = SubResource( 68 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4.98277, 7.28044 )
-shape = SubResource( 69 )
+position = Vector2( 4.98277, 7.18055 )
+shape = SubResource( 72 )
 
 [node name="RayCast2D_Down" type="RayCast2D" parent="."]
 position = Vector2( -22.0595, -21.8824 )
@@ -368,26 +374,26 @@ enabled = true
 collision_mask = 2
 
 [node name="RayCast2D_Side" type="RayCast2D" parent="."]
-position = Vector2( -6.25, 0 )
+position = Vector2( -5.5421, 10.2646 )
 enabled = true
 cast_to = Vector2( -20, 0 )
 collision_mask = 2
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
-position = Vector2( 0, 0.917702 )
+position = Vector2( 0, 3 )
+collision_layer = 9
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 4.98277, 2.77029 )
+position = Vector2( 4.98277, 1.97569 )
 shape = SubResource( 69 )
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-position = Vector2( -9.95961, -1.5892 )
+position = Vector2( -9.95961, 1.32762 )
 shape = SubResource( 70 )
 
 [node name="AttackDetector" type="Area2D" parent="." groups=[
@@ -397,7 +403,7 @@ collision_layer = 0
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
-position = Vector2( -9.95961, 0 )
+position = Vector2( -9.95961, 1.32762 )
 shape = SubResource( 71 )
 disabled = true
 
@@ -407,6 +413,13 @@ one_shot = true
 [node name="AttackAreaDelay2" type="Timer" parent="."]
 
 [node name="PlayerDetectorDelay" type="Timer" parent="."]
+
+[node name="FireballBuildup" type="Timer" parent="."]
+one_shot = true
+
+[node name="TurretRight" parent="." instance=ExtResource( 20 )]
+position = Vector2( 14, 14 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Skt_meleesound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
@@ -430,6 +443,8 @@ random_strategy = 2
 random_volume_range = 10.0
 
 [node name="LichtkegelSklNich" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, 1.32762 )
 texture = ExtResource( 19 )
 color = Color( 0.929412, 0.0745098, 0.27451, 1 )
 energy = 0.8
@@ -443,3 +458,4 @@ shadow_enabled = true
 [connection signal="timeout" from="AttackAreaDelay" to="." method="_on_AttackAreaDelay_timeout"]
 [connection signal="timeout" from="AttackAreaDelay2" to="." method="_on_AttackAreaDelay2_timeout"]
 [connection signal="timeout" from="PlayerDetectorDelay" to="." method="_on_PlayerDetectorDelay_timeout"]
+[connection signal="timeout" from="FireballBuildup" to="." method="_on_FireballBuildup_timeout"]
