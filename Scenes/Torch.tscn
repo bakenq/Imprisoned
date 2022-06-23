@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Torch/Torch_Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Images/light.png" type="Texture" id=2]
@@ -41,6 +41,27 @@ animations = [ {
 "speed": 16.0
 } ]
 
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.00775194, 0.116279, 0.914729, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.109804, 0.109804, 0.109804, 0, 0.953125, 0.72229, 0.0297852, 1, 0.87685, 0.132949, 0.0843522, 1, 0.870588, 0.0901961, 0.0901961, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+lifetime_randomness = 0.3
+flag_disable_z = true
+direction = Vector3( 0, -10, 0 )
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 20.0
+initial_velocity_random = 0.4
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+scale_random = 0.4
+color_ramp = SubResource( 9 )
+
 [node name="Torch" type="Light2D"]
 texture = ExtResource( 2 )
 texture_scale = 0.5
@@ -54,3 +75,8 @@ frames = SubResource( 7 )
 animation = "Torch"
 frame = 4
 playing = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -0.111359, -0.8909 )
+explosiveness = 0.15
+process_material = SubResource( 10 )
