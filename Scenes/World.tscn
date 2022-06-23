@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Scenes/TurretLeft.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Plattform.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Enemies/EnemySkeletonBoss.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Scenes/Torch.tscn" type="PackedScene" id=25]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -1713,3 +1714,15 @@ position = Vector2( 955.271, -44.5392 )
 
 [node name="Collision_Tile" parent="." instance=ExtResource( 20 )]
 position = Vector2( 619.75, -49.3511 )
+
+[node name="Torch" parent="." instance=ExtResource( 25 )]
+position = Vector2( 262.545, 808.264 )
+
+[node name="Torch2" parent="." instance=ExtResource( 25 )]
+position = Vector2( 491.851, 852.361 )
+
+[node name="Torch3" parent="." instance=ExtResource( 25 )]
+position = Vector2( 712.967, 852.676 )
+
+[node name="Torch4" parent="." instance=ExtResource( 25 )]
+position = Vector2( -47.7716, 825.79 )
