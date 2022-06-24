@@ -51,5 +51,6 @@ color = Color( 1, 0, 0, 1 )
 stream = ExtResource( 4 )
 volume_db = -5.0
 autoplay = true
+max_distance = 200.0
 
 [connection signal="area_entered" from="." to="." method="_on_Heart_area_entered"]
