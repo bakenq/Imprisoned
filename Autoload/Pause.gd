@@ -31,3 +31,12 @@ func _on_Button_pressed():
 func set_visible(is_visible):
 	for node in get_children():
 		node.visible = is_visible
+
+
+func _on_Fullscreen_pressed():
+	OS.window_fullscreen = !OS.window_fullscreen
+
+
+func _on_Exit_pressed():
+	get_tree().quit()
+
