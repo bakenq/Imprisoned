@@ -1497,6 +1497,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 48, 0, 48 )
 font_data = ExtResource( 26 )
 
 [node name="World" type="Node2D"]
+position = Vector2( 1.05951, -0.529724 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -83.5801, 1175 )
@@ -1509,7 +1510,6 @@ script = ExtResource( 11 )
 position = Vector2( 0, -6.10352e-05 )
 scale = Vector2( 1.00625, 1.07812 )
 frames = SubResource( 1 )
-frame = 3
 playing = true
 flip_h = true
 
@@ -1682,7 +1682,7 @@ position = Vector2( 1888, 360 )
 position = Vector2( -1008, 840.918 )
 
 [node name="TurretRight2" parent="Turrets" instance=ExtResource( 21 )]
-position = Vector2( -1011, 520 )
+position = Vector2( -1008.09, 520 )
 
 [node name="TurretRight3" parent="Turrets" instance=ExtResource( 21 )]
 position = Vector2( -1008, 279.329 )
@@ -1697,7 +1697,7 @@ position = Vector2( 1136, 376 )
 position = Vector2( 1440, 170.221 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.643137, 0.721569, 0.752941, 1 )
+color = Color( 0.447059, 0.52549, 0.552941, 1 )
 
 [node name="MovingPlattforms" type="Node2D" parent="."]
 
