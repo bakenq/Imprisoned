@@ -106,8 +106,9 @@ func _on_AnimatedSprite_animation_finished():
 			#getting_hit = false
 			#is_attacking = false
 		if $AnimatedSprite.animation == "Death":
-			spawn_heart()
-			queue_free()
+			pass
+			#spawn_heart()
+			#queue_free()
 
 # Combat/Hit detection
 func _on_Hitbox_area_entered(area):
@@ -124,6 +125,7 @@ func _on_Hitbox_area_entered(area):
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")
+		$OnDeathTimer.start(3.0)
 
 		
 	elif area.is_in_group("Sword") && hitpoints > 0:
@@ -179,5 +181,11 @@ func moveSoundSKT():
 func _on_FireballBuildup_timeout():
 	if moving_left:
 		$TurretRight.shoot()
+		$TurretRight2.shoot2()
 	elif !moving_left:
 		$TurretRight.shoot2()
+		$TurretRight2.shoot()
+
+
+func _on_OnDeathTimer_timeout():
+	get_tree().change_scene("res://Scenes/WinScreen.tscn")

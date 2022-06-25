@@ -168,16 +168,29 @@ func _on_PlayerDetector_body_entered(body):
 			motion.x = 0
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = 8
+			
+			$TurretRight2.position.x = -6.25
+			$TurretRight/AnimationPlayer.play("buildup")
+			$TurretRight2/AnimationPlayer.play("buildup")
+			$FireballBuildup.start(1.5)
+			
 			$Hitbox/CollisionShape2D.position.x = -3
 			if dead == false:
 				$AnimatedSprite.play("Attack")
 				$Skt_meleesound.play()
 				is_attacking = true
 		else:
+			moving_left = false
 			$AttackAreaDelay.start(0.7)
 			motion.x = 0
 			$AnimatedSprite.offset.y = -2
 			$AnimatedSprite.offset.x = -10
+			
+			$TurretRight2.position.x = -14
+			$TurretRight/AnimationPlayer.play("buildup")
+			$TurretRight2/AnimationPlayer.play("buildup")
+			$FireballBuildup.start(1.5)
+			
 			$Hitbox/CollisionShape2D.position.x = 0
 			$AnimatedSprite.play("Attack")
 			$Skt_meleesound.play()
@@ -195,8 +208,9 @@ func _on_AnimatedSprite_animation_finished():
 			$AnimatedSprite.offset.y = 0
 			$AnimatedSprite.offset.x = 0
 		if $AnimatedSprite.animation == "Death":
-			spawn_heart()
-			queue_free()
+			pass
+			#spawn_heart()
+			#queue_free()
 
 # Combat/Hit detection
 func _on_Hitbox_area_entered(area):
@@ -213,6 +227,7 @@ func _on_Hitbox_area_entered(area):
 		$AnimatedSprite.offset.y = 1
 		$AnimatedSprite.offset.x = -4
 		$AnimatedSprite.play("Death")
+		$OnDeathTimer.start(3.0)
 		
 		
 	elif area.is_in_group("Sword") && hitpoints > 0:
@@ -284,3 +299,18 @@ func moveSoundSKT():
 	elif motion.x == 0 && is_on_floor():
 		$Skt_Walking.stop()
 
+
+
+func _on_FireballBuildup_timeout():
+	if moving_left:
+		#$TurretRight2.position.x = -6.25
+		$TurretRight.shoot()
+		$TurretRight2.shoot2()
+	elif !moving_left:
+		#$TurretRight2.position.x = -14
+		$TurretRight.shoot()
+		$TurretRight2.shoot2()
+
+
+func _on_OnDeathTimer_timeout():
+	get_tree().change_scene("res://Scenes/WinScreen.tscn")
