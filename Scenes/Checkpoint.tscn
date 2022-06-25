@@ -3,6 +3,7 @@
 [ext_resource path="res://Scenes/Checkpoint.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 105.612
 
 [node name="Area2D" type="Area2D"]
 collision_layer = 0
