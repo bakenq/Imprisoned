@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/EnemySkeleton.tscn" type="PackedScene" id=2]
@@ -23,11 +23,13 @@
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/TurretLeft.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Scenes/Plattform.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scenes/World.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/Torch.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Assets/fonts/alagard.ttf" type="DynamicFontData" id=26]
 [ext_resource path="res://Scenes/PlattformLeft.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Heart.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Scenes/Enemies/BossEnemySkeletonChasing.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Scenes/Checkpoint.tscn" type="PackedScene" id=30]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -1644,6 +1646,7 @@ font_data = ExtResource( 26 )
 
 [node name="World" type="Node2D"]
 position = Vector2( 1.05951, -0.529724 )
+script = ExtResource( 24 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -102.357, 1175 )
@@ -1656,7 +1659,7 @@ script = ExtResource( 11 )
 position = Vector2( 0, -6.10352e-05 )
 scale = Vector2( 1.00625, 1.07812 )
 frames = SubResource( 1 )
-frame = 2
+frame = 4
 playing = true
 flip_h = true
 
@@ -2038,3 +2041,9 @@ position = Vector2( 1237.19, 1092.66 )
 
 [node name="Torch10" parent="Nodefortorch" instance=ExtResource( 25 )]
 position = Vector2( 1441.51, 1092.22 )
+
+[node name="Area2D" parent="." instance=ExtResource( 30 )]
+position = Vector2( 664.551, -237.433 )
+
+[node name="Area2D2" parent="." instance=ExtResource( 30 )]
+position = Vector2( -443.132, 818.828 )

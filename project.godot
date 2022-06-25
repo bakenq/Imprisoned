@@ -64,6 +64,7 @@ config/icon="res://icon.png"
 
 MusicController="*res://Autoload/MusicController.tscn"
 Pause="*res://Autoload/Pause.tscn"
+Checkpoint="*res://Autoload/Checkpoint.gd"
 
 [display]
 
